@@ -10,17 +10,9 @@ public class Main {
     public static void main(String[] args) {
 
         // Основное поле
-        int width = 5;
-        int height = 5;
+        int width = 10;
+        int height = 10;
         int[][] enemyField = new int[height][width];
-        /*int[][] enemyField =
-                {
-                        {0,0,0,0,0},
-                        {0,0,0,0,0},
-                        {0,0,0,0,0},
-                        {0,0,0,0,0},
-                        {0,0,0,0,0},
-                };*/
 
         // Основной лист координат
         List<String> coords = new LinkedList<>();
@@ -32,27 +24,31 @@ public class Main {
             }
         }
 
-        printField(enemyField);
-        printAvailableCoords(coords);
+        //printAll(enemyField, coords);
 
-        placementShips(coords, enemyField, height, width);
+        placementShips(coords, enemyField, height, width, 4, 1);
+        placementShips(coords, enemyField, height, width, 3, 2);
+        placementShips(coords, enemyField, height, width, 2, 3);
+        placementShips(coords, enemyField, height, width, 1, 4);
 
-        printField(enemyField);
-        printAvailableCoords(coords);
+        //printAll(enemyField, coords);
+        printGame(enemyField);
     }
 
     // Функция, расставляющая корабли
-    public static void placementShips(List<String> coords, int[][] field, int height, int width){
+    public static void placementShips(List<String> coords, int[][] field, int height, int width, int deck, int shipCount){
 
         List<String> coordsCopy = new LinkedList<>();
         int[][] fieldCopy = new int[height][width];
 
-        int shipLength = 2;
+        int shipLength = deck;
 
         // Количество кораблей
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < shipCount; i++) {
 
             while (true) {
+
+                //printAll(fieldCopy, coordsCopy);
 
                 // Если допустимые координаты закончились, а корабли еще остались,
                 // то обновляем поля и начинаем алгоритм заново
@@ -74,6 +70,8 @@ public class Main {
 
                 // При наличии функции deleteUnusedCoordinates(List<String> coords, int[][] field, int y, int x);
                 // мы автоматически проверям занятность клеток и вокруг клеток
+                // т.к. в List<String> coords у нас содержатся только свободные координаты
+
                 // Занята?
                 /*if (enemyField[y][x] == 1) {
                     continue;
@@ -87,16 +85,84 @@ public class Main {
                 // Длинна корабля больше 1 клетки?
                 if (shipLength > 1) {
 
+                    //Рандомное направление
+                    int direction = new Random().nextInt(2);
+
+                    // Проверяем возможность постановки последней части корабля 1: существует ли вообще такая ячейка (не выходим ли за границы)
+
+                    if(direction == 0) {
+                        // Влево
+                        if (x - (shipLength - 1) >= 0) {
+                            // Проверяем возможность постановки последней части корабля 2: свободно ли и свободно ли вокруг
+                            if (canBuild(fieldCopy, y, x - (shipLength - 1))) {
+                                // Удаляем координаты
+                                deleteUnusedCoordinates(coordsCopy, fieldCopy, y, x);
+                                deleteUnusedCoordinates(coordsCopy, fieldCopy, y, x - (shipLength - 1));
+
+                                // Ставим все части корабля
+                                for (int _x = x; _x >= x - (shipLength - 1); _x--) {
+                                    fieldCopy[y][_x] = 1;
+                                }
+
+                                break;
+                            }
+                        }
+
+                        //Вправо
+                        if (x + (shipLength - 1) < width) {
+
+                            if (canBuild(fieldCopy, y, x + (shipLength - 1))) {
+                                deleteUnusedCoordinates(coordsCopy, fieldCopy, y, x);
+                                deleteUnusedCoordinates(coordsCopy, fieldCopy, y, x + (shipLength - 1));
+
+                                // Ставим все части корабля
+                                for (int _x = x; _x <= x + (shipLength - 1); _x++) {
+                                    fieldCopy[y][_x] = 1;
+                                }
+
+                                break;
+                            }
+                        }
+                    }else {
+                        //Вверх
+                        if (y - (shipLength - 1) >= 0) {
+
+                            if (canBuild(fieldCopy, y - (shipLength - 1), x)) {
+                                deleteUnusedCoordinates(coordsCopy, fieldCopy, y, x);
+                                deleteUnusedCoordinates(coordsCopy, fieldCopy, y - (shipLength - 1), x);
+
+                                // Ставим все части корабля
+                                for (int _y = y; _y >= y - (shipLength - 1); _y--) {
+                                    fieldCopy[_y][x] = 1;
+                                }
+
+                                break;
+                            }
+                        }
+                        // Вниз
+                        if (y + (shipLength - 1) < height) {
+
+                            if (canBuild(fieldCopy, y + (shipLength - 1), x)) {
+                                deleteUnusedCoordinates(coordsCopy, fieldCopy, y, x);
+                                deleteUnusedCoordinates(coordsCopy, fieldCopy, y + (shipLength - 1), x);
+
+                                // Ставим все части корабля
+                                for (int _y = y; _y <= y + (shipLength - 1); _y++) {
+                                    fieldCopy[_y][x] = 1;
+                                }
+
+                                break;
+                            }
+                        }
+                    }
+
+
                 }else {
                     fieldCopy[y][x] = 1;
+                    deleteUnusedCoordinates(coordsCopy, fieldCopy, y, x);
+                    break;
                 }
-
-                deleteUnusedCoordinates(coordsCopy, fieldCopy, y, x);
-
-                break;
             }
-
-
         }
 
         coords.clear();
@@ -106,6 +172,8 @@ public class Main {
             System.arraycopy(fieldCopy[i], 0, field[i], 0, fieldCopy[i].length);
         }
     }
+
+    // Функция, проверяющая возможность построения 2-4 палубного корабля
 
     // Функция, удаляющая из листа координат все координаты, где невозможно больше поставить корабль
     public static void deleteUnusedCoordinates(List<String> coords, int[][] field, int y, int x){
@@ -135,7 +203,7 @@ public class Main {
                 if(i < 0 || j < 0 || j >= field[y].length || i >= field.length || (i == y && j == x)){
                     continue;
                 }
-                if(field[i][j] != 0){
+                if(field[i][j] == 1){
                     return false;
                 }
             }
@@ -159,5 +227,25 @@ public class Main {
             System.out.print(coord + ", ");
         }
         System.out.println();
+    }
+
+    // Функция, выводящая массив на экран + доступные координаты на экран
+    public static void printAll(int[][] field, List<String> coords){
+        printField(field);
+        printAvailableCoords(coords);
+    }
+
+    // Функция, выводящая "картинку" игры
+    public static void printGame(int[][] field){
+        for (int[] ints : field) {
+            for (int anInt : ints) {
+                switch (anInt){
+                    case 0: System.out.print(String.format("%2s ", ".")); break;
+                    case 1: System.out.print(String.format("%2s ", "\u25A0")); break;
+                }
+
+            }
+            System.out.println();
+        }
     }
 }
