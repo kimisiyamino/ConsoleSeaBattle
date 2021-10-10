@@ -17,6 +17,15 @@ public class Cell {
         state = CellState.empty;
     }
 
+    public int getCoordX(){
+        return coordLetter-'A';
+    }
+
+    public int getCoordY(){
+        return coordNum-1;
+    }
+
+
     @Override
     public String toString() {
         return coord;

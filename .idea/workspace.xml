@@ -1,7 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="94fa22a7-eabe-4b73-8ca9-f7c4cac8229d" name="Default Changelist" comment="" />
+    <list default="true" id="94fa22a7-eabe-4b73-8ca9-f7c4cac8229d" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/eleonoralion/DotComHeadFirst/DotCom.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/eleonoralion/DotComHeadFirst/DotComBust.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/eleonoralion/DotComHeadFirst/GameHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2021_10_08_DotCom/com/eleonoralion/DotCom/Cell.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/2021_10_08_DotCom/com/eleonoralion/DotCom/Cell.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2021_10_08_DotCom/com/eleonoralion/DotCom/DotCom.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/2021_10_08_DotCom/com/eleonoralion/DotCom/DotCom.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2021_10_08_DotCom/com/eleonoralion/DotCom/GameField$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/2021_10_08_DotCom/com/eleonoralion/DotCom/GameField$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2021_10_08_DotCom/com/eleonoralion/DotCom/GameField.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/2021_10_08_DotCom/com/eleonoralion/DotCom/GameField.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/eleonoralion/DotCom/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/eleonoralion/DotCom/Cell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/eleonoralion/DotCom/DotCom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/eleonoralion/DotCom/DotCom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/eleonoralion/DotCom/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/eleonoralion/DotCom/Enemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/eleonoralion/DotCom/GameField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/eleonoralion/DotCom/GameField.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/eleonoralion/DotCom/Ship.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/eleonoralion/DotCom/Ship.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,7 +29,11 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1zDzjeXuoU2boNU4iPKUEZk4z2n" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="autoscrollFromSource" value="true" />
     <option name="autoscrollToSource" value="true" />
@@ -24,9 +43,10 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="DotCom" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.eleonoralion.DotCom.DotCom" />
       <module name="2021_10_08_DotCom" />
@@ -40,8 +60,64 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="DotComBust" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.eleonoralion.DotComHeadFirst.DotComBust" />
+      <module name="2021_10_08_DotCom" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.eleonoralion.DotComHeadFirst.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.eleonoralion.TestList.Main" />
+      <module name="2021_10_08_DotCom" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.eleonoralion.TestList.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.eleonoralion.DotCom2.Main" />
+      <module name="2021_10_08_DotCom" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.eleonoralion.DotCom2.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.eleonoralion.TestList.Main2" />
+      <module name="2021_10_08_DotCom" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.eleonoralion.TestList.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Main2" />
+        <item itemvalue="Application.Main (1)" />
+        <item itemvalue="Application.DotComBust" />
         <item itemvalue="Application.DotCom" />
       </list>
     </recent_temporary>
@@ -60,33 +136,53 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="626" y="76" key="#com.intellij.ide.util.MemberChooser" timestamp="1633700140936">
+    <state x="626" y="76" key="#com.intellij.ide.util.MemberChooser" timestamp="1633878396949">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="626" y="76" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1633700140936" />
-    <state width="1853" height="252" key="GridCell.Tab.0.bottom" timestamp="1633700568792">
+    <state x="626" y="76" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1633878396949" />
+    <state width="926" height="288" key="GridCell.Tab.0.bottom" timestamp="1633879668246">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1853" height="252" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1633700568792" />
-    <state width="1853" height="252" key="GridCell.Tab.0.center" timestamp="1633700568792">
+    <state width="926" height="288" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1633879668246" />
+    <state width="926" height="288" key="GridCell.Tab.0.center" timestamp="1633879668246">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1853" height="252" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1633700568792" />
-    <state width="1853" height="252" key="GridCell.Tab.0.left" timestamp="1633700568791">
+    <state width="926" height="288" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1633879668246" />
+    <state width="926" height="288" key="GridCell.Tab.0.left" timestamp="1633879668246">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1853" height="252" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1633700568791" />
-    <state width="1853" height="252" key="GridCell.Tab.0.right" timestamp="1633700568792">
+    <state width="926" height="288" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1633879668246" />
+    <state width="926" height="288" key="GridCell.Tab.0.right" timestamp="1633879668246">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1853" height="252" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1633700568792" />
+    <state width="926" height="288" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1633879668246" />
+    <state width="1853" height="229" key="GridCell.Tab.1.bottom" timestamp="1633718109724">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1853" height="229" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1633718109724" />
+    <state width="1853" height="229" key="GridCell.Tab.1.center" timestamp="1633718109724">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1853" height="229" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1633718109724" />
+    <state width="1853" height="229" key="GridCell.Tab.1.left" timestamp="1633718109723">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1853" height="229" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1633718109723" />
+    <state width="1853" height="229" key="GridCell.Tab.1.right" timestamp="1633718109724">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1853" height="229" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1633718109724" />
     <state x="221" y="0" key="SettingsEditor" timestamp="1633697613801">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="221" y="0" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1633697613801" />
-    <state x="506" y="257" key="com.intellij.ide.util.TipDialog" timestamp="1633697619967">
+    <state x="506" y="257" key="com.intellij.ide.util.TipDialog" timestamp="1633868253821">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="506" y="257" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1633697619967" />
+    <state x="506" y="257" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1633868253821" />
+    <state x="448" y="232" key="run.anything.popup" timestamp="1633876122270">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="448" y="232" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1633876122270" />
   </component>
 </project>
