@@ -1,4 +1,4 @@
-package com.eleonoralion.DotCom2;
+package com.eleonoralion.Test;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -24,37 +24,57 @@ public class Main {
             }
         }
 
-        //printAll(enemyField, coords);
-
+        // Ставим корабли противнику
         placementShips(coords, enemyField, height, width, 4, 1);
         placementShips(coords, enemyField, height, width, 3, 2);
         placementShips(coords, enemyField, height, width, 2, 3);
         placementShips(coords, enemyField, height, width, 1, 4);
 
+
         //printAll(enemyField, coords);
-        printGame(enemyField);
+        /*for (int i = 0; i < 10; i++) {
+            placementShips(coords, enemyField, height, width, 4, 1);
+            placementShips(coords, enemyField, height, width, 3, 2);
+            placementShips(coords, enemyField, height, width, 2, 3);
+            placementShips(coords, enemyField, height, width, 1, 4);
+
+            System.out.println("Вариант " + (i + 1));
+            printGame(enemyField);
+            System.out.println();
+
+            enemyField = new int[height][width];
+            coords = new LinkedList<>();
+            for (int l = 0; l < enemyField.length; l++) {
+                for (int j = 0; j < enemyField[l].length; j++) {
+                    coords.add(l+" "+j);
+                }
+            }
+        }*/
+        //printAll(enemyField, coords);
     }
 
-    // Функция, расставляющая корабли
-    public static void placementShips(List<String> coords, int[][] field, int height, int width, int deck, int shipCount){
 
+    // Функция, расставляющая корабли
+    // Алгоритм рассчитан только на 1-4ех палубные корабли
+    // Так же алгоритм рассчитан в основном только на классические правила игры
+    public static void placementShips(List<String> coords, int[][] field, int height, int width, int shipLength, int shipCount){
+
+        // Создаем копии полей, для тестового расставления кораблей.
+        // Если вариант расставления неудачный, то мы не "испортим" основные поля
         List<String> coordsCopy = new LinkedList<>();
         int[][] fieldCopy = new int[height][width];
-
-        int shipLength = deck;
 
         // Количество кораблей
         for (int i = 0; i < shipCount; i++) {
 
             while (true) {
 
-                //printAll(fieldCopy, coordsCopy);
-
                 // Если допустимые координаты закончились, а корабли еще остались,
                 // то обновляем поля и начинаем алгоритм заново
                 if(coordsCopy.size() <= 0){
 
                     coordsCopy = new LinkedList<>(coords);
+
                     fieldCopy = new int[height][width];
                     for (int j = 0; j < field.length; j++) {
                         System.arraycopy(field[j], 0, fieldCopy[j], 0, field[j].length);
@@ -88,10 +108,11 @@ public class Main {
                     //Рандомное направление
                     int direction = new Random().nextInt(2);
 
-                    // Проверяем возможность постановки последней части корабля 1: существует ли вообще такая ячейка (не выходим ли за границы)
-
+                    // Если направление 0: Строить влево или вправо
                     if(direction == 0) {
+
                         // Влево
+                        // Проверяем возможность постановки последней части корабля 1: существует ли вообще такая ячейка (не выходим ли за границы)
                         if (x - (shipLength - 1) >= 0) {
                             // Проверяем возможность постановки последней части корабля 2: свободно ли и свободно ли вокруг
                             if (canBuild(fieldCopy, y, x - (shipLength - 1))) {
@@ -109,9 +130,11 @@ public class Main {
                         }
 
                         //Вправо
+                        // Проверяем возможность постановки последней части корабля 1: существует ли вообще такая ячейка (не выходим ли за границы)
                         if (x + (shipLength - 1) < width) {
-
+                            // Проверяем возможность постановки последней части корабля 2: свободно ли и свободно ли вокруг
                             if (canBuild(fieldCopy, y, x + (shipLength - 1))) {
+                                // Удаляем координаты
                                 deleteUnusedCoordinates(coordsCopy, fieldCopy, y, x);
                                 deleteUnusedCoordinates(coordsCopy, fieldCopy, y, x + (shipLength - 1));
 
@@ -123,11 +146,14 @@ public class Main {
                                 break;
                             }
                         }
+                        // Если направление 1: Строить вверх или вниз
                     }else {
                         //Вверх
+                        // Проверяем возможность постановки последней части корабля 1: существует ли вообще такая ячейка (не выходим ли за границы)
                         if (y - (shipLength - 1) >= 0) {
-
+                            // Проверяем возможность постановки последней части корабля 2: свободно ли и свободно ли вокруг
                             if (canBuild(fieldCopy, y - (shipLength - 1), x)) {
+                                // Удаляем координаты
                                 deleteUnusedCoordinates(coordsCopy, fieldCopy, y, x);
                                 deleteUnusedCoordinates(coordsCopy, fieldCopy, y - (shipLength - 1), x);
 
@@ -140,9 +166,11 @@ public class Main {
                             }
                         }
                         // Вниз
+                        // Проверяем возможность постановки последней части корабля 1: существует ли вообще такая ячейка (не выходим ли за границы)
                         if (y + (shipLength - 1) < height) {
-
+                            // Проверяем возможность постановки последней части корабля 2: свободно ли и свободно ли вокруг
                             if (canBuild(fieldCopy, y + (shipLength - 1), x)) {
+                                // Удаляем координаты
                                 deleteUnusedCoordinates(coordsCopy, fieldCopy, y, x);
                                 deleteUnusedCoordinates(coordsCopy, fieldCopy, y + (shipLength - 1), x);
 
@@ -154,9 +182,11 @@ public class Main {
                                 break;
                             }
                         }
+
+                        // Если не одно из условий не выполнилось, мы не выходим из цикла while и повторяем процедуру
                     }
 
-
+                // Если длинна корабля = 1
                 }else {
                     fieldCopy[y][x] = 1;
                     deleteUnusedCoordinates(coordsCopy, fieldCopy, y, x);
@@ -165,6 +195,7 @@ public class Main {
             }
         }
 
+        // При успешном расставлении заносим данные в основные поля из тестовых
         coords.clear();
         coords.addAll(coordsCopy);
 
@@ -172,8 +203,6 @@ public class Main {
             System.arraycopy(fieldCopy[i], 0, field[i], 0, fieldCopy[i].length);
         }
     }
-
-    // Функция, проверяющая возможность построения 2-4 палубного корабля
 
     // Функция, удаляющая из листа координат все координаты, где невозможно больше поставить корабль
     public static void deleteUnusedCoordinates(List<String> coords, int[][] field, int y, int x){
@@ -243,7 +272,6 @@ public class Main {
                     case 0: System.out.print(String.format("%2s ", ".")); break;
                     case 1: System.out.print(String.format("%2s ", "\u25A0")); break;
                 }
-
             }
             System.out.println();
         }
