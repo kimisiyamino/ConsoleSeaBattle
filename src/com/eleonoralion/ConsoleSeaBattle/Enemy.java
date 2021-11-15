@@ -10,17 +10,23 @@ public class Enemy {
     private int width;
     private int height;
     private int[][] enemyField;
+
     // Основной лист координат
     private List<String> coords;
+
+    // Храним корабли противника
+    private List<Ship> enemyShips;
 
     public Enemy(){
         width = 10;
         height = 10;
         enemyField = new int[height][width];
         coords = new LinkedList<>();
+        enemyShips = new ArrayList<>();
     }
 
-    public void init(){
+    // Инициализация
+    public void init(boolean printEnemyField){
         // Заполняем лист
         for (int i = 0; i < enemyField.length; i++) {
             for (int j = 0; j < enemyField[i].length; j++) {
@@ -33,6 +39,9 @@ public class Enemy {
         placementShips(coords, enemyField, height, width, 3, 2);
         placementShips(coords, enemyField, height, width, 2, 3);
         placementShips(coords, enemyField, height, width, 1, 4);
+
+        if(printEnemyField)
+            printEnemyField(enemyField);
     }
 
     // Функция, расставляющая корабли
@@ -69,20 +78,6 @@ public class Enemy {
                 int y = Integer.parseInt(coord.split(" ")[0]);
                 int x = Integer.parseInt(coord.split(" ")[1]);
 
-                // При наличии функции deleteUnusedCoordinates(List<String> coords, int[][] field, int y, int x);
-                // мы автоматически проверям занятность клеток и вокруг клеток
-                // т.к. в List<String> coords у нас содержатся только свободные координаты
-
-                // Занята?
-                /*if (enemyField[y][x] == 1) {
-                    continue;
-                }*/
-
-                // Занято вокруг?
-                /*if (!canBuild(enemyField, y, x)) {
-                    continue;
-                }*/
-
                 // Длинна корабля больше 1 клетки?
                 if (shipLength > 1) {
 
@@ -97,15 +92,24 @@ public class Enemy {
                         if (x - (shipLength - 1) >= 0) {
                             // Проверяем возможность постановки последней части корабля 2: свободно ли и свободно ли вокруг
                             if (canBuild(fieldCopy, y, x - (shipLength - 1))) {
+                                // Создаем корабль
+                                Ship ship = new Ship();
+
                                 // Удаляем координаты
-                                deleteUnusedCoordinates(coordsCopy, fieldCopy, y, x);
-                                deleteUnusedCoordinates(coordsCopy, fieldCopy, y, x - (shipLength - 1));
+                                deleteUnusedCoordinates(coordsCopy, fieldCopy, y, x, ship);
+                                deleteUnusedCoordinates(coordsCopy, fieldCopy, y, x - (shipLength - 1), ship);
 
                                 // Ставим все части корабля
                                 for (int _x = x; _x >= x - (shipLength - 1); _x--) {
                                     fieldCopy[y][_x] = 1;
+                                    // Корабль знает своё местопоожение
+                                    ship.getCoords().add(y+" "+_x);
                                 }
 
+                                // Удаляем лишние координаты
+                                ship.fixCoords();
+                                // Сохраняем корабль
+                                enemyShips.add(ship);
                                 break;
                             }
                         }
@@ -115,15 +119,24 @@ public class Enemy {
                         if (x + (shipLength - 1) < width) {
                             // Проверяем возможность постановки последней части корабля 2: свободно ли и свободно ли вокруг
                             if (canBuild(fieldCopy, y, x + (shipLength - 1))) {
+                                // Создаем корабль
+                                Ship ship = new Ship();
+
                                 // Удаляем координаты
-                                deleteUnusedCoordinates(coordsCopy, fieldCopy, y, x);
-                                deleteUnusedCoordinates(coordsCopy, fieldCopy, y, x + (shipLength - 1));
+                                deleteUnusedCoordinates(coordsCopy, fieldCopy, y, x, ship);
+                                deleteUnusedCoordinates(coordsCopy, fieldCopy, y, x + (shipLength - 1), ship);
 
                                 // Ставим все части корабля
                                 for (int _x = x; _x <= x + (shipLength - 1); _x++) {
                                     fieldCopy[y][_x] = 1;
+                                    // Корабль знает своё местопоожение
+                                    ship.getCoords().add(y+" "+_x);
                                 }
 
+                                // Удаляем лишние координаты
+                                ship.fixCoords();
+                                // Сохраняем корабль
+                                enemyShips.add(ship);
                                 break;
                             }
                         }
@@ -134,15 +147,24 @@ public class Enemy {
                         if (y - (shipLength - 1) >= 0) {
                             // Проверяем возможность постановки последней части корабля 2: свободно ли и свободно ли вокруг
                             if (canBuild(fieldCopy, y - (shipLength - 1), x)) {
+                                // Создаем корабль
+                                Ship ship = new Ship();
+
                                 // Удаляем координаты
-                                deleteUnusedCoordinates(coordsCopy, fieldCopy, y, x);
-                                deleteUnusedCoordinates(coordsCopy, fieldCopy, y - (shipLength - 1), x);
+                                deleteUnusedCoordinates(coordsCopy, fieldCopy, y, x, ship);
+                                deleteUnusedCoordinates(coordsCopy, fieldCopy, y - (shipLength - 1), x, ship);
 
                                 // Ставим все части корабля
                                 for (int _y = y; _y >= y - (shipLength - 1); _y--) {
                                     fieldCopy[_y][x] = 1;
+                                    // Корабль знает своё местопоожение
+                                    ship.getCoords().add(_y+" "+x);
                                 }
 
+                                // Удаляем лишние координаты
+                                ship.fixCoords();
+                                // Сохраняем корабль
+                                enemyShips.add(ship);
                                 break;
                             }
                         }
@@ -151,15 +173,23 @@ public class Enemy {
                         if (y + (shipLength - 1) < height) {
                             // Проверяем возможность постановки последней части корабля 2: свободно ли и свободно ли вокруг
                             if (canBuild(fieldCopy, y + (shipLength - 1), x)) {
+                                // Создаем корабль
+                                Ship ship = new Ship();
+
                                 // Удаляем координаты
-                                deleteUnusedCoordinates(coordsCopy, fieldCopy, y, x);
-                                deleteUnusedCoordinates(coordsCopy, fieldCopy, y + (shipLength - 1), x);
+                                deleteUnusedCoordinates(coordsCopy, fieldCopy, y, x, ship);
+                                deleteUnusedCoordinates(coordsCopy, fieldCopy, y + (shipLength - 1), x, ship);
 
                                 // Ставим все части корабля
                                 for (int _y = y; _y <= y + (shipLength - 1); _y++) {
                                     fieldCopy[_y][x] = 1;
+                                    // Корабль знает своё местопоожение
+                                    ship.getCoords().add(_y+" "+x);
                                 }
-
+                                // Удаляем лишние координаты
+                                ship.fixCoords();
+                                // Сохраняем корабль
+                                enemyShips.add(ship);
                                 break;
                             }
                         }
@@ -169,8 +199,18 @@ public class Enemy {
 
                     // Если длинна корабля = 1
                 }else {
+                    // Ставим корабль на поле
                     fieldCopy[y][x] = 1;
-                    deleteUnusedCoordinates(coordsCopy, fieldCopy, y, x);
+                    // Добавляем корабль
+                    Ship ship = new Ship();
+                    // Корабль знает своё местопоожение
+                    ship.getCoords().add(y+" "+x);
+                    // Удаляем лишние координаты
+                    ship.fixCoords();
+                    // Сохраняем корабль
+                    enemyShips.add(ship);
+                    // Удаляем координаты
+                    deleteUnusedCoordinates(coordsCopy, fieldCopy, y, x, ship);
                     break;
                 }
             }
@@ -186,7 +226,7 @@ public class Enemy {
     }
 
     // Функция, удаляющая из листа координат все координаты, где невозможно больше поставить корабль
-    private void deleteUnusedCoordinates(List<String> coords, int[][] field, int y, int x){
+    private void deleteUnusedCoordinates(List<String> coords, int[][] field, int y, int x, Ship ship){
         List<String> deletedCoords = new ArrayList<>();
 
         for (int i = y - 1; i < y + 2; i++){
@@ -198,6 +238,9 @@ public class Enemy {
             }
         }
 
+        // Добавляем кораблю координаты точек вокруг корабля для функционала когда корабль потоплен, выставляем эти точки
+        ship.getCoordsAround().addAll(deletedCoords);
+        // Удаляем из листа координат все координаты, где невозможно больше поставить корабль
         coords.removeAll(deletedCoords);
     }
 
@@ -219,5 +262,28 @@ public class Enemy {
             }
         }
         return true;
+    }
+
+    // Функция, выводящая игровое поле противника
+    public void printEnemyField(int[][] field){
+        for (int[] ints : field) {
+            for (int anInt : ints) {
+                switch (anInt){
+                    case 0: System.out.print(String.format("%2s ", ".")); break;
+                    case 1: System.out.print(String.format("%2s ", "\u25A0")); break;
+                }
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
+
+    // Getters
+    public List<Ship> getEnemyShips() {
+        return enemyShips;
+    }
+
+    public int[][] getEnemyField() {
+        return enemyField;
     }
 }

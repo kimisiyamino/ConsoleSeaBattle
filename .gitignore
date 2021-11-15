@@ -1,0 +1,18 @@
+#############
+## Idea
+#############
+/.idea/
+/JavaRushTasks/
+target/
+/lib/
+/out/
+.idea
+*.iml
+*.iws
+*.jrtc
+*.class
+*.info
+*.jar
+*.properties
+*.png
+*.log
