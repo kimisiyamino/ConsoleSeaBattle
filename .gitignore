@@ -2,7 +2,6 @@
 ## Idea
 #############
 /.idea/
-/JavaRushTasks/
 target/
 /lib/
 /out/
@@ -16,3 +15,4 @@ target/
 *.properties
 *.png
 *.log
+fgi
